@@ -43,9 +43,6 @@ public class CalculatorGui extends Application {
 	
 	private Label lblEquationView;
 	
-	//Holds numbers for their respective Button instances
-	private Map<Button, Integer> numberButtons = new HashMap<>();
-	
 	@Override
 	public void start(Stage stage) throws Exception {
 		
@@ -83,36 +80,35 @@ public class CalculatorGui extends Application {
 		Button btnParenClose = new Button(")");
 		btnParenClose.setOnAction(eventHandler -> { addCharToEquationView(')'); });
 		
-		//A temporary list of number buttons (ordered)
-		//to assist with adding buttons at specific places
-		//in the button rows.
-		ArrayList<Button> numbButtons = new ArrayList<>();
-		
-		//Adds a number button for all numbers 0 - 9 (inclusive)
-		for (int i = 0; i <= 9; i++) {
-			
-			Button b = new Button(Integer.toString(i));
-			b.setOnAction(eventHandler -> {
-				
-				//Adds whatever number is associated with this button instance to the equation
-				addCharToEquationView( Character.forDigit( numberButtons.get( (Button)eventHandler.getSource() ), 10 ) );
-				
-			});
-			
-			numberButtons.put(b, i);
-			numbButtons.add(b);
-			
-		}
-		
-		VBox rowContainer = new VBox();
+		//Number Buttons
+		Button btnZero = new Button("0");
+		btnZero.setOnAction(eventHandler -> { addCharToEquationView('0'); });
+		Button btnOne = new Button("1");
+		btnOne.setOnAction(eventHandler -> { addCharToEquationView('1'); });
+		Button btnTwo = new Button("2");
+		btnTwo.setOnAction(eventHandler -> { addCharToEquationView('2'); });
+		Button btnThree = new Button("3");
+		btnThree.setOnAction(eventHandler -> { addCharToEquationView('3'); });
+		Button btnFour = new Button("4");
+		btnFour.setOnAction(eventHandler -> { addCharToEquationView('4'); });
+		Button btnFive = new Button("5");
+		btnFive.setOnAction(eventHandler -> { addCharToEquationView('5'); });
+		Button btnSix = new Button("6");
+		btnSix.setOnAction(eventHandler -> { addCharToEquationView('6'); });
+		Button btnSeven = new Button("7");
+		btnSeven.setOnAction(eventHandler -> { addCharToEquationView('7'); });
+		Button btnEight = new Button("8");
+		btnEight.setOnAction(eventHandler -> { addCharToEquationView('8'); });
+		Button btnNine = new Button("9");
+		btnNine.setOnAction(eventHandler -> { addCharToEquationView('9'); });
 		
 		//The rows of buttons
 		ArrayList<HBox> buttonHolders = new ArrayList<>();
 		buttonHolders.add(new HBox(btnClear, btnBackspace, btnQuit, btnDivide));
-		buttonHolders.add(new HBox(numbButtons.get(7), numbButtons.get(8), numbButtons.get(9), btnMultiply));
-		buttonHolders.add(new HBox(numbButtons.get(4), numbButtons.get(5), numbButtons.get(6), btnSubtract));
-		buttonHolders.add(new HBox(numbButtons.get(1), numbButtons.get(2), numbButtons.get(3), btnAdd));
-		buttonHolders.add(new HBox(numbButtons.get(0), btnParenOpen, btnParenClose, btnEquals));
+		buttonHolders.add(new HBox(btnSeven, btnEight, btnNine, btnMultiply));
+		buttonHolders.add(new HBox(btnFour, btnFive, btnSix, btnSubtract));
+		buttonHolders.add(new HBox(btnOne, btnTwo, btnThree, btnAdd));
+		buttonHolders.add(new HBox(btnZero, btnParenOpen, btnParenClose, btnEquals));
 		
 		lblEquationView = new Label("");
 		lblEquationView.setPrefSize(192, 64);
@@ -120,6 +116,7 @@ public class CalculatorGui extends Application {
 		lblEquationView.setTextAlignment(TextAlignment.CENTER);
 		lblEquationView.setPadding(new Insets(4));
 		
+		VBox rowContainer = new VBox();
 		rowContainer.getChildren().add(lblEquationView);
 		rowContainer.getChildren().addAll(buttonHolders);
 		
