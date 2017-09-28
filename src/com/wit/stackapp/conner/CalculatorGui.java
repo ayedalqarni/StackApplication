@@ -1,7 +1,5 @@
-package com.wit.stackapp.connerayed;
+package com.wit.stackapp.conner;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javafx.application.Application;
 import javafx.application.Platform;

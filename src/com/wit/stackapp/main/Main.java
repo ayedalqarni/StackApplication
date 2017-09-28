@@ -1,5 +1,5 @@
 package com.wit.stackapp.main;
-import com.wit.stackapp.connerayed.CalculatorGui;
+import com.wit.stackapp.conner.CalculatorGui;
 
 public class Main {
 
