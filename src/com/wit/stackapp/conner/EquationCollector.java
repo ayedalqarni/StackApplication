@@ -1,5 +1,9 @@
 package com.wit.stackapp.conner;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import com.wit.stackapp.main.VectorStack;
 
 public class EquationCollector {
@@ -22,13 +26,29 @@ public class EquationCollector {
 	
 	public EquationCollector(String filepath) {
 		
-		if (filepath == null) {
+		equations = new VectorStack<String>();
+		
+		if (filepath == null) { System.out.println("FILEPATH CANNOT BE NULL"); }
+		
+		try {
+			
+			Scanner fileIn = new Scanner(new File(filepath));
+		
+			while (fileIn.hasNextLine()) {
 				
-			System.out.println("CAN'T FIND FILE: " + filepath);
+				//Assumes each line of the file is a seperate
+				//equation. Validity can be checked by isValid()
+				equations.push(fileIn.nextLine());
+				
+			}
+			
+			fileIn.close();
+			
+		} catch (FileNotFoundException e) {
+			
+			System.out.println("EQUATION COLLECTOR CAN'T FIND FILE: " + filepath);
 		
 		}
-		
-		equations = new VectorStack<String>();
 		
 		initialized = true;
 		
