@@ -15,7 +15,7 @@ public class EquationCollector {
 		
 			return !equations.isEmpty();
 		
-		} else { return false; }
+		} else { System.out.println("EQUATIONCOLLECTOR NOT INITIALIZED"); return false; }
 		
 	}
 	public String getNextEquation() {
@@ -25,7 +25,7 @@ public class EquationCollector {
 			//Can return exception
 			return equations.pop();
 		
-		} else { return null; }
+		} else { System.out.println("EQUATIONCOLLECTOR NOT INITIALIZED"); return null; }
 		
 	}
 	
@@ -62,66 +62,72 @@ public class EquationCollector {
 		
 	}
 	
+	/**
+	 * Checks if the given infix equation is syntactically correct.
+	 * 
+	 * Does not check for arithmetic errors.
+	 * 
+	 * @param equation - The infix equation to check.
+	 * @return Whether the equation is syntactically correct.
+	 */
 	public static boolean isValid(String equation) {
 		
 		if (equation == null || equation.length() == 0) { return false; }
-		
-		StringBuilder numberBuilder = new StringBuilder();
-		
-		VectorStack<Integer> nums = new VectorStack<>();
-		VectorStack<Character> ops = new VectorStack<>();
-		int openParens = 0;
-		int closedParens = 0;
-		
-		//Deconstruct the equation, but don't equate anything.
-		//equates anything to the right of a division.
-		
-		for(int i = 0; i < equation.length(); i++) {
+
+		VectorStack<Character> equationChars = new VectorStack<>();
+
+		for (int i = 0; i < equation.length(); i++) {
+			
+			int openParens = 0;
+			int closedParens = 0;
+			
+			char nextChar = 0;
+			char prevChar = 0;
 			
 			char currentChar = equation.charAt(i);
 			
-			CharType type = getCharType(currentChar);
+			if (i + 1 < equation.length()) { nextChar = equation.charAt(i + 1); }
 			
-			switch(type) {
+			if (!equationChars.isEmpty()) { prevChar = equationChars.peek(); }
 			
-			case NONE:
+			switch(getCharType(currentChar)) {
+			
+			case NUMBER:
 				
-				//There's a character we don't recognize. It must be invalid.
-				return false;
+				break;
 				
 			case OPERATOR:
 				
-				if (currentChar == '(') { openParens++; }
-				if (currentChar == ')') { closedParens++; }
-				
-				ops.push(currentChar);
-				
-				if (numberBuilder.length() > 0) {
-					
-					//The character we got isn't a number.
-					//if we're recording a number, the number is now finished
-					nums.push(Integer.parseInt(numberBuilder.toString()));
-					numberBuilder.delete(0, numberBuilder.length());
-					
-				}
+				if ((getCharType(prevChar) != CharType.NUMBER && prevChar != ')')
+						|| getCharType(nextChar) != CharType.NUMBER && nextChar != '(') { return false; }
 				
 				break;
+				
+				
+			case PARENTHESIS:
 			
-			case NUMBER:
-				numberBuilder.append(currentChar);
+				if (prevChar == '(' && currentChar == ')') { return false; }
+				
+				if (currentChar == '(') { openParens++; }
+				
+				if (currentChar == ')' && ++closedParens > openParens) { return false; }
+				
 				break;
 				
+			default:
+				return false;
+			
 			}
 			
+			equationChars.push(currentChar);
+			
 		}
-		
-		if (openParens != closedParens) { return false; }
 		
 		return true;
 		
 	}
 	
-	private enum CharType { NUMBER, OPERATOR, NONE }
+	private enum CharType { NUMBER, OPERATOR, PARENTHESIS, NONE }
 	
 	private static CharType getCharType(char character) {
 		
@@ -129,6 +135,8 @@ public class EquationCollector {
 		
 			case ')':
 			case '(':
+				return CharType.PARENTHESIS;
+						
 			case '+':
 			case '-':
 			case '/':
@@ -151,6 +159,12 @@ public class EquationCollector {
 				return CharType.NONE;
 		
 		}
+		
+	}
+	
+	public static void doUnitTests() {
+		
+		
 		
 	}
 	
