@@ -1,11 +1,8 @@
-package com.wit.stackapp.conner;
+package edu.wit.desn.comp2000.stackapp;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-import com.wit.stackapp.main.UnitTester;
-import com.wit.stackapp.main.VectorStack;
 
 public class EquationCollector {
 
@@ -154,7 +151,7 @@ public class EquationCollector {
 		
 	}
 	
-	private enum CharType { NUMBER, OPERATOR, PARENTHESIS, NONE }
+	public enum CharType { NUMBER, OPERATOR, PARENTHESIS, NONE }
 	
 	private static CharType getCharType(char character) {
 		
@@ -204,7 +201,7 @@ public class EquationCollector {
 		
 		UnitTester.printTestDescription("Getting Equations: normal file");
 		
-		EquationCollector collectorOne =  new EquationCollector("src/com/wit/stackapp/conner/test.txt");
+		EquationCollector collectorOne =  new EquationCollector("test.txt");
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -229,7 +226,7 @@ public class EquationCollector {
 		
 		
 		UnitTester.printTestDescription("Getting Equations: empty file");
-		EquationCollector collectorThree = new EquationCollector("src/com/wit/stackapp/conner/EmptyFile.txt");
+		EquationCollector collectorThree = new EquationCollector("EmptyFile.txt");
 		
 		sb = new StringBuilder("[]");
 		
@@ -244,9 +241,9 @@ public class EquationCollector {
 		
 		UnitTester.printTestDescription("Getting Equations: A non-existant filepath");
 		
-		System.out.println("Expected: \tEQUATION COLLECTOR CAN'T FIND FILE: src/com/wit/stackapp/conner/unicorn.txt");
+		System.out.println("Expected: \tEQUATION COLLECTOR CAN'T FIND FILE: unicorn.txt");
 		@SuppressWarnings("unused")
-		EquationCollector collectorFour = new EquationCollector("src/com/wit/stackapp/conner/unicorn.txt");
+		EquationCollector collectorFour = new EquationCollector("unicorn.txt");
 		
 	}
 	
@@ -257,7 +254,7 @@ public class EquationCollector {
 		int totalEquations = 0;
 		int invalidExpressions = 0;
 		
-		EquationCollector collectorOne = new EquationCollector("src/com/wit/stackapp/conner/invalidOnly.txt");
+		EquationCollector collectorOne = new EquationCollector("invalidOnly.txt");
 		
 		while(collectorOne.hasNextEquation()) {
 			
@@ -279,7 +276,7 @@ public class EquationCollector {
 		totalEquations = 0;
 		int validExpressions = 0;
 		
-		EquationCollector collectorTwo = new EquationCollector("src/com/wit/stackapp/conner/validOnly.txt");
+		EquationCollector collectorTwo = new EquationCollector("validOnly.txt");
 		
 		while(collectorTwo.hasNextEquation()) {
 			
@@ -304,7 +301,7 @@ public class EquationCollector {
 		validExpressions = 0;
 		invalidExpressions = 0;
 		
-		EquationCollector collectorThree = new EquationCollector("src/com/wit/stackapp/conner/mixedValidInvalid.txt");
+		EquationCollector collectorThree = new EquationCollector("mixedValidInvalid.txt");
 		
 		while(collectorThree.hasNextEquation()) {
 			

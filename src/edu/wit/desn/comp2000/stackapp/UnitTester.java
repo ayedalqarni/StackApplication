@@ -1,4 +1,4 @@
-﻿package com.wit.stackapp.main;
+﻿package edu.wit.desn.comp2000.stackapp;
 
 /**
  * A class with static functions to streamline unit testing

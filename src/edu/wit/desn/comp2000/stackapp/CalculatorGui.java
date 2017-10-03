@@ -1,4 +1,4 @@
-package com.wit.stackapp.conner;
+package edu.wit.desn.comp2000.stackapp;
 import java.util.ArrayList;
 
 import javafx.application.Application;

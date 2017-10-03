@@ -1,6 +1,5 @@
-package com.wit.stackapp.main;
-import com.wit.stackapp.conner.CalculatorGui;
-import com.wit.stackapp.conner.EquationCollector;
+package edu.wit.desn.comp2000.stackapp;
+import edu.wit.desn.comp2000.stackapp.EquationCollector.CharType;
 
 public class Main {
 
